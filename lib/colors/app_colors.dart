@@ -6,4 +6,5 @@ class AppColors {
   static final smallTextColor = Color(0xFF2e3253);
   static final textHolder = Color(0xFFedf0f8);
   static final textGrey = Color(0xFFafb1b5);
+  static final backgroundLightBlue = Color(0xffE5E4E2);
 }
