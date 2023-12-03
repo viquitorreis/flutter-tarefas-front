@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front/colors/app_colors.dart';
+import 'package:front/widgets/button_widget.dart';
 import 'package:front/widgets/task_widget.dart';
+import 'package:get/get.dart';
 
 class AllTasks extends StatelessWidget {
   const AllTasks({super.key});
@@ -39,9 +41,14 @@ class AllTasks extends StatelessWidget {
               top: 40,
             ),
             alignment: Alignment.topLeft,
-            child: Icon(
-              Icons.arrow_back,
-              color: AppColors.mainColor,
+            child: InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: AppColors.mainColor,
+              ),
             ),
             width: double.maxFinite,
             height: MediaQuery.of(context).size.height / 3.2,
@@ -105,7 +112,47 @@ class AllTasks extends StatelessWidget {
                   },
                   confirmDismiss: (DismissDirection direction) async {
                     if (direction == DismissDirection.startToEnd) {
-                      // equerda para direita
+                      // equerda para direita ( editar )
+                      showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        barrierColor: Colors.transparent,
+                        context: context,
+                        builder: (_) {
+                          return Container(
+                            height: 500,
+                            width: double.maxFinite,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF2e3253).withOpacity(0.4),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ButtonWidget(
+                                    backgroundcolor: AppColors.mainColor,
+                                    text: "Visualizar",
+                                    textColor: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  ButtonWidget(
+                                    backgroundcolor: AppColors.mainColor,
+                                    text: "Editar",
+                                    textColor: AppColors.textGrey,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
                       return false;
                     } else {
                       return Future.delayed(Duration(seconds: 1),
