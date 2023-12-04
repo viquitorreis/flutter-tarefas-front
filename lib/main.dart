@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/controller/data_controller.dart';
 import 'package:front/screens/home_screen.dart';
 import 'package:get/get.dart';
 
@@ -9,8 +10,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  loadData() async {
+    await Get.find<DataController>().getData();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => DataController());
+    loadData();
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
